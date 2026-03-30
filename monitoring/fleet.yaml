@@ -1,15 +1,10 @@
 defaultNamespace: cattle-monitoring-system
 labels:
   app: rancher-monitoring
+dependsOn:
+  - name: rancher-system-tools-monitoring-crd 
 helm:
-  # This repo provides the index.yaml Fleet requires
-  repo: https://charts.rancher.io 
+  repo: https://charts.rancher.io
   chart: rancher-monitoring
-  version: 105.0.0+up57.0.3 
+  version: 105.0.0+up57.0.3
   waitForJobs: true
-# Target all RKE2 clusters provisioned via Rancher
-targetCustomizations:
-- name: all-rke2-clusters
-  clusterSelector:
-    matchLabels:
-      provider.cattle.io: rke2
